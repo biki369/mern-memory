@@ -7,37 +7,21 @@ import { useEffect, useState } from "react";
 import { fetchPosts } from "../../apis";
 
 
-const Posts = ({  setCurrentId }) => {
+const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [postData, setPostData] = useState([]);
+
   const posts = useSelector((state) => state.posts);
-
-  console.log(posts, "dispatch posts===================================");
-
-  const getPost = async () => {
-    try {
-      const { data } = await fetchPosts();
-      setPostData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getPost();
-  }, [])
 
   // console.log(postData,"postData");
 
   return (
     <>
       {
-        !postData.length ? <CircularProgress /> : (
+        !posts.length ? <CircularProgress /> : (
           <Grid className={classes.container} container alignItems="stretch" spacing={3}>
-            {postData?.map((post) => (
+            {posts?.map((post) => (
               <Grid key={post._id} item xs={12} sm={6}>
-                <Post post={post}  setCurrentId={setCurrentId}/>
+                <Post post={post} setCurrentId={setCurrentId} />
               </Grid>
             ))}
           </Grid>

@@ -14,7 +14,7 @@ function App() {
   const [currentId, setCurrentId] = useState(0);
 
   useEffect(() => {
-      dispatch(getPosts)
+      dispatch(getPosts());
   }, [dispatch])
 
   return (

@@ -10,25 +10,29 @@ const Form = ({setCurrentId, currentId}) => {
   const dispatch = useDispatch();
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
 
-  const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
-  // console.log(post, "post")
+  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+
+  console.log(post, "post")
+
   useEffect(() => {
     if (post) setPostData(post);
   }, [post])
 
   const handelSubmit = (e) => {
     e.preventDefault();
-
-    if(currentId){
-      dispatch(updatePost(currentId, postData))
-    }else{
-      dispatch(addPost(postData))
+    if (currentId === 0) {
+      dispatch(addPost(postData));
+      clear();
+    } else {
+      dispatch(updatePost(currentId, postData));
+      clear();
     }
     // console.log("Submit")
   }
 
   const clear = () => {
-    console.log("clear")
+    setCurrentId(0);
+    setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   }
 
   return (
