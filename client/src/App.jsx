@@ -11,9 +11,10 @@ function App() {
   const appBarImgUrl = "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [currentId, setCurrentId] = useState(0);
 
   useEffect(() => {
-    dispatch(getPosts)
+      dispatch(getPosts)
   }, [dispatch])
 
   return (
@@ -33,10 +34,10 @@ function App() {
           <Container >
             <Grid container justify="space-between" alignItems="stretch" spacing={3}>
               <Grid item xs={12} sm={7}>
-                <Posts />
+                <Posts setCurrentId={setCurrentId}/>
               </Grid>
               <Grid item xs={12} sm={4}>
-                <Form />
+                <Form  currentId={currentId} setCurrentId={setCurrentId}/>
               </Grid>
             </Grid>
           </Container>
