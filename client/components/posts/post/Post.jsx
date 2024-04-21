@@ -6,6 +6,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { deletePost } from '../../../redux/actions/posts';
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
