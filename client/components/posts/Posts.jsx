@@ -9,11 +9,8 @@ import { fetchPosts } from "../../apis";
 
 const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
-
   const posts = useSelector((state) => state.posts);
-
-  // console.log(postData,"postData");
-
+  
   return (
     <>
       {

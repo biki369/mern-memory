@@ -14,8 +14,7 @@ app.use(cors());
 // use routes
 app.use("/posts", router);
 
-const URL =
-  "mongodb+srv://biki369:db321@cluster0.j46fh7r.mongodb.net/memoryDb?retryWrites=true&w=majority&appName=Cluster0";
+const URL = "mongodb+srv://biki369:db321@cluster0.j46fh7r.mongodb.net/memoryDb?retryWrites=true&w=majority&appName=Cluster0";
 // const URL = "mongodb+srv://biki369:db321@cluster0.j46fh7r.mongodb.net/ ";
 const PORT = process.env.PORT || 5000;
 

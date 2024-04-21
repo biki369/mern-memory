@@ -12,12 +12,9 @@ const Form = ({ setCurrentId, currentId }) => {
 
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
-  // console.log(post, "post")
-
   useEffect(() => {
     if (post) setPostData(post);
   }, [post])
-
   const handelSubmit = (e) => {
     e.preventDefault();
     if (currentId === 0) {
@@ -30,7 +27,6 @@ const Form = ({ setCurrentId, currentId }) => {
     clear();
     // console.log("Submit")
   }
-
   const clear = () => {
     setCurrentId(0);
     setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });

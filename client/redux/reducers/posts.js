@@ -1,8 +1,8 @@
-const initialState = {
-    posts: [],
-    loading: false,
-    error: null
-};
+// const initialState = {
+//     posts: [],
+//     loading: false,
+//     error: null
+// };
 
 const reducer = (posts =[], action) => {
   switch (action.type) {
@@ -13,6 +13,8 @@ const reducer = (posts =[], action) => {
     case "CREATE":
       return [...posts, action.payload];
     case "UPDATE":
+      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
+    case  "LINK":
       return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     case "DELETE":
       return posts.filter((post) => post._id !== action.payload);

@@ -27,8 +27,6 @@ function App() {
             </Typography>
             <img src={appBarImgUrl} alt="404" className={classes.image} />
           </Box>
-
-
         </AppBar>
         <Grow in>
           <Container >
