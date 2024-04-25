@@ -74,13 +74,6 @@ const Auth = () => {
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
-    
-        try {
-          useDispatch({ type: AUTH, data: { result, token } });
-    
-        } catch (error) {
-          console.log(error);
-        }
       };
 
       const googleError = () =>{
@@ -112,7 +105,7 @@ const Auth = () => {
                         }
                         <Button onClick={handelSubmit} type="submit" fullWidth variant="contained" color="primary" className={"submit"}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                         <GoogleLogin
-                            clientId="564033717568-e5p23rhvcs4i6kffgsbci1d64r8hp6fn.apps.googleusercontent.com"
+                            clientId="275690682417-bi5hene59jg1nmhfps8s6s5v4db18pt2.apps.googleusercontent.com"
                             render={(renderProps) => (
                                 <Button className={"googleButton"} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<GoogleIcon />} variant="contained">
                                     Google Sign In
