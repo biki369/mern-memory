@@ -1,46 +1,24 @@
-import { useEffect, useState } from 'react'
-import { AppBar, Box, Container, Grid, Grow, Typography } from '@mui/material';
-import './App.css'
-// import Post from '../components/posts/post/Post';
-import Posts from '../components/posts/Posts';
-import Form from '../components/form/Form';
+
+import { Container, } from '@mui/material';
+import './App.css';
 import useStyles from './styles';
-import { useDispatch } from 'react-redux';
-import { getPosts } from '../redux/actions/posts';
+import Navbar from '../components/Navbar/Navbar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from '../pages/home/Home';
+import Auth from '../pages/auth/Auth';
 function App() {
-  const appBarImgUrl = "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const [currentId, setCurrentId] = useState(0);
-
-  useEffect(() => {
-      dispatch(getPosts());
-  }, [dispatch, currentId]);
-
   return (
     <>
-      <Container maxWidth="lg" >
-        <AppBar position='static' color='inherit' className={classes.appBar} >
-          <Box className={classes.appBarItems}>
-            <Typography variant='h2' align='center' className={classes.heading}>
-              Memories
-            </Typography>
-            <img src={appBarImgUrl} alt="404" className={classes.image} />
-          </Box>
-        </AppBar>
-        <Grow in>
-          <Container >
-            <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-              <Grid item xs={12} sm={7}>
-                <Posts setCurrentId={setCurrentId}/>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Form  currentId={currentId} setCurrentId={setCurrentId}/>
-              </Grid>
-            </Grid>
-          </Container>
-        </Grow>
-      </Container>
+      <BrowserRouter>
+        <Container maxWidth="lg" className={classes.root}>
+          <Navbar />
+          <Routes>
+            <Route path='/' exact element={<Home />} />
+            <Route path='/auth' element={<Auth />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
     </>
   )
 }
