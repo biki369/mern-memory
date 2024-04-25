@@ -10,3 +10,5 @@ router.delete('/:id', deletePost);
 router.patch('/:id/link-post', linkPost);
 
 export default router;
+
+

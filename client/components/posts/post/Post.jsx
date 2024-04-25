@@ -6,11 +6,12 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { deletePost, linkPost } from '../../../redux/actions/posts';
+import { deletePost, getPosts, linkPost } from '../../../redux/actions/posts';
+import { useEffect } from 'react';
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  
   const tempImg = "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png";
 
   return (
