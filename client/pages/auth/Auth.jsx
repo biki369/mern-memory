@@ -3,11 +3,11 @@ import { makeStyles } from '@mui/styles'
 import LockIcon from '@mui/icons-material/Lock';
 import Input from '../../components/input-field/Input';
 import { useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import Alert from '@mui/material/Alert';
-import GoogleIcon from '@mui/icons-material/Google';
-
+// import GoogleIcon from '@mui/icons-material/Google';
+import {jwtDecode} from 'jwt-decode'
 
 const useStyles = makeStyles(() => ({
     paper: {
@@ -22,17 +22,22 @@ const useStyles = makeStyles(() => ({
             marginTop: '16px',
             marginLeft: '16px'
         },
-        "& .googleButton":{
-            margin:"13px 0 0 16px",
-            backgroundColor:"#4285F4",
+        "& .googleButton": {
+            margin: "13px 0 0 16px",
+            backgroundColor: "#4285F4",
         }
         // padding: theme.spacing(2),
     },
     root: {
         '& .MuiTextField-root': {
             //   margin: theme.spacing(1),
-            margin: '10px'
+            // margin: '10px'
         },
+        // "& .S9gUrf-YoZ4jf": {
+            // width: "100%",
+            // margin: "10px 0 6px 16px",
+            // backgroundColor: "#4285F4",
+        // }
     },
     avatar: {
         // margin: theme.spacing(1),
@@ -72,17 +77,23 @@ const Auth = () => {
     }
 
     const googleSuccess = async (res) => {
-        const result = res?.profileObj;
-        const token = res?.tokenId;
-      };
-
-      const googleError = () =>{
+        // const result = res?.profileObj;
+        // const token = res?.tokenId;
+        const token = jwtDecode(res.credential)
+        console.log(token);
+        try {
+            dispatch({ type: "AUTH", data: {token } });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const googleError = (err) => {
+        console.log(err);
         <Alert severity="error">Google Sign In was unsuccessful. Try again later</Alert>
-      }
-
+    }
 
     return (
-        <Container component='main' maxWidth='xs'>
+        <Container component='main' maxWidth='xs' className={classes.root}>
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}><LockIcon /></Avatar>
                 <Typography variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
@@ -104,17 +115,25 @@ const Auth = () => {
                             isSignUp && <Input name='confirmPassword' label="Repeat Password" handelChange={handelChange} type="password" />
                         }
                         <Button onClick={handelSubmit} type="submit" fullWidth variant="contained" color="primary" className={"submit"}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
+
                         <GoogleLogin
-                            clientId="275690682417-bi5hene59jg1nmhfps8s6s5v4db18pt2.apps.googleusercontent.com"
-                            render={(renderProps) => (
-                                <Button className={"googleButton"} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<GoogleIcon />} variant="contained">
-                                    Google Sign In
-                                </Button>
-                            )}
                             onSuccess={googleSuccess}
-                            onFailure={googleError}
-                            cookiePolicy="single_host_origin"
+                            onError={googleError}
+                            style={{
+                                width: "100%",
+                                margin: "10px 0 6px 16px",
+                                backgroundColor: "#4285F4",
+                            }}
                         />
+
+                        {/* <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                console.log(credentialResponse);
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        /> */}
 
                         <Grid container justifyContent="flex-end">
                             <Grid item>
